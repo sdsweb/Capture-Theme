@@ -82,6 +82,8 @@
 				<?php sds_after_posts_sidebar(); ?>
 			</section>
 
+			<section class="clear"></section>
+
 			<?php comments_template(); // Comments ?>
 		</section>
 	</section>

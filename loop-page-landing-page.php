@@ -36,6 +36,8 @@
 				<?php edit_post_link( __( 'Edit Page', 'capture' ) ); // Allow logged in users to edit ?>
 			</article>
 
+			<section class="clear"></section>
+
 			<?php comments_template(); // Comments ?>
 		</section>
 	</section>

@@ -38,8 +38,10 @@
 			Images = Backbone.Collection.extend( {
 				model: Image,
 				url: capture.ajaxurl,
-				initialize: function () {
-					_.bindAll( this ); // Bind "this" to all functions
+				initialize: function ( options ) {
+					this.options = options || {}; // Store options
+
+					_.bindAll( this, 'getModel', 'setModel', 'nextModel', 'prevModel' ); // Bind "this" to all functions
 				},
 				comparator: function( model ) {
 					return model.get( 'id' );
@@ -80,9 +82,10 @@
 				capture_slideshow_elements: {},
 				model: new Image(), // Default model
 				template: _.template( $( '#capture-slideshow-template' ).html() ),
-				initialize: function() {
-					// Bind "this" to all functions
-					_.bindAll( this );
+				initialize: function( options ) {
+					this.options = options || {}; // Store options
+
+					_.bindAll( this, 'setModel', 'initElements', 'render', 'getImages' ); // Bind "this" to all functions
 
 					// Re-render this view when the model changes
 					this.listenTo( this.collection, 'change', this.setModel );

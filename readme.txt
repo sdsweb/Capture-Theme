@@ -1,40 +1,92 @@
-1.0.5
----
-- Removing reference to Github plugin
+/**
+ * Font Awesome Web Font - http://fontawesome.io/
+ * License: GPL Compatible (http://fontawesome.io/license/)
+ * Font License: SIL OFL 1.1 (http://scripts.sil.org/OFL)
+ * Code License: MIT License (http://opensource.org/licenses/mit-license.html)
+ * Copyright: Dave Gandy, https://twitter.com/davegandy
+ */
 
-1.0.4
----
-- Release on WordPress[dot]org
+/**
+ * WordPress Core CSS - http://codex.wordpress.org/CSS#WordPress_Generated_Classes
+ * License: GPL2
+ * Copyright: WordPress.org, http://wordpress.org
+ */
+ 
+ /**
+ * CSS Reset - http://meyerweb.com/eric/tools/css/reset/
+ * License: None (public domain)
+ * Copyright: Eric Meyer, http://meyerweb.com/eric/
+ *
+ * We've used Eric Meyer's reset as a base and modified it a bit to suit our needs.
+ */
 
-1.0.3
----
-- Fixed call to missing Capture slideshow minified file
+/**
+ * HTML5 Shiv - https://code.google.com/p/html5shiv/
+ * License: Dual licensed under the MIT or GPL Version 2 licenses
+ * Copyright: Alexander Farkas, http://protofunc.com/
+ */
 
-1.0.2
----
-- Fixed border colors on alternative color schemes
-- Fixed spacing in 'int' casting declaration
-- Added WP gallery slideshow functionality
-- Fixed issue with web fonts where Damion and Oswald fonts were not loaded when a font besides the default were chosen; added Damion and Oswald to array keys in sds_web_fonts() function
-- Closed Capture Slideshow on collection fetch failure
-- Fixed bug where fallback primary nav was displayed on mobile
-- Styled WordPress galleries on mobile view
-- Added hammer.js for mobile swipe events on gallery
-- Adjusted size and position of post meta
-- Removed background and border from image captions (galleries)
-- Fixed bug where Featured Image/Video meta box would appear on posts that did not support post-thumbnails (i.e. attachments)
-- Updated SDS Core (01/21/2014)
-- Switched child theme functionality check to use is_child_theme()
-- Fixed no posts message display
-- Added WooCommerce support
-- Adjusted single image attachment template display (moved next/previous links up higher)
-- Fixed pagination display in color scheme styles
+/**
+ * WordPress 3.5 Media Uploader Script/Tutorial - http://mikejolley.com/2012/12/using-the-new-wordpress-3-5-media-uploader-in-plugins/
+ * License: None (public domain)
+ * Copyright: Mike Jolley, http://mikejolley.com/
+ *
+ * We've modified this to suit our needs.
+ */
+
+/**
+ * imagesLoaded - /js/imagesloaded.min.js - http://desandro.github.io/imagesloaded/
+ * License: MIT
+ * Copyright: Tomas Sardyha, http://darsa.in/ & David DeSandro, http://desandro.com/
+ */
+
+/**
+ * Hammer.JS - /js/hammer.min.js - http://eightmedia.github.io/hammer.js/
+ * License: MIT
+ * Copyright: Jorik Tangelder, http://joriktangelder.nl/
+ */
 
 
-1.0.1
----
-- Added slideshow overlay and new slideshow icon to single posts and blog archive
+/**
+ * CSS Spinner (Spinner.css; .three-quarters) - https://github.com/jlong/css-spinners/
+ * License: MIT
+ * Copyright: John W. Long, http://wiseheartdesign.com/ and Julia Elman, http://juliaelman.com/
+ *
+ * We're not using this file directly, just the ".three-quarter" styles modified to suit our needs.
+ */
 
-1.0
----
-- New Theme
+/**
+ * Menu Icon SVG - /images/menu-icon.svg
+ * License: GPL2
+ * Copyright: Slocum Studio, http://slocumthemes.com/
+ */
+
+/**
+ * Close Icon SVG - /images/close-icon.svg
+ * License: GPL2
+ * Copyright: Slocum Studio, http://slocumthemes.com/
+ */
+
+/**
+ * Fullscreen SVG - /images/fullscreen-icon.svg
+ * License: GPL2
+ * Copyright: Slocum Studio, http://slocumthemes.com/
+ */
+
+/**
+ * Slideshow SVG - /images/slideshow-icon.svg
+ * License: GPL2
+ * Copyright: Slocum Studio, http://slocumthemes.com/
+ */
+
+/**
+ * Prev SVG - /images/prev.svg
+ * License: GPL2
+ * Copyright: Slocum Studio, http://slocumthemes.com/
+ */
+
+/**
+ * Next SVG - /images/next.svg
+ * License: GPL2
+ * Copyright: Slocum Studio, http://slocumthemes.com/
+ */

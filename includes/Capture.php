@@ -3,7 +3,7 @@
  * This class manages all functionality with our Capture theme.
  */
 class Capture {
-	const CAPTURE_VERSION = '1.0.6';
+	const CAPTURE_VERSION = '1.1.4';
 
 	private static $instance; // Keep track of the instance
 
@@ -25,11 +25,17 @@ class Capture {
 		add_action( 'after_switch_theme', array( $this, 'after_switch_theme' ) ); // Flush rewrite rules on activation
 		add_action( 'after_setup_theme', array( $this, 'after_setup_theme' ), 20 ); // Register image sizes
 		add_action( 'widgets_init', array( $this, 'widgets_init' ), 20 ); // Unregister sidebars and alter Primary Sidebar output
+		add_action( 'add_meta_boxes', array( $this, 'add_meta_boxes' ) ); // Add Meta Boxes
 		add_action( 'pre_get_posts', array( $this, 'pre_get_posts' ) ); // Used to enqueue editor styles based on post type
 		add_action( 'wp_enqueue_scripts', array( $this, 'wp_enqueue_scripts' ) ); // Enqueue all stylesheets (Main Stylesheet, Fonts, etc...)
 		add_action( 'the_post', array( $this, 'the_post' ) ); // Remove Default Jetpack Share Buttons
 		add_filter( 'the_content', array( $this, 'the_content' ) ); // Prepend Jetpack Share Buttons
 		add_action( 'wp_footer', array( $this, 'wp_footer' ) ); // Responsive navigation functionality
+
+		// Theme Customizer
+		add_action( 'customize_register', array( $this, 'customize_register' ), 20 ); // Switch background properties to use refresh transport method
+		add_action( 'customize_controls_print_styles', array( $this, 'customize_controls_print_styles' ), 20 ); // Customizer Styles
+		add_filter( 'theme_mod_content_color', array( $this, 'theme_mod_content_color' ) ); // Set the default content color
 
 		// Capture Slideshow
 		add_action( 'wp_ajax_capture_slideshow', array( $this, 'wp_ajax_capture_slideshow' ) ); // Ajax/Backbone Requests
@@ -67,6 +73,14 @@ class Capture {
 	 * This function adds images sizes to WordPress.
 	 */
 	function after_setup_theme() {
+		global $content_width;
+
+		/**
+		 * Set the Content Width for embedded items.
+		 */
+		if ( ! isset( $content_width ) )
+			$content_width = 1106;
+
 		add_image_size( 'capture-1200x500', 1200, 500, true ); // Used for featured images on blog page
 		add_image_size( 'capture-1200x9999', 1200, 9999, false ); // Used for featured images on single posts and pages
 
@@ -83,6 +97,14 @@ class Capture {
 			'comment-form',
 			'comment-list'
 		) );
+
+		// Custom Background (color/image)
+		add_theme_support( 'custom-background', array(
+			'default-color' => '#ffffff'
+		) );
+
+		// Theme textdomain
+		load_theme_textdomain( 'capture', get_template_directory() . '/languages' );
 	}
 
 	/**
@@ -103,6 +125,53 @@ class Capture {
 		unregister_sidebar( 'front-page-sidebar' );
 		unregister_sidebar( 'header-call-to-action-sidebar' );
 		unregister_sidebar( 'footer-sidebar' );
+	}
+
+	/**
+	 * This function runs when meta boxes are added.
+	 */
+	function add_meta_boxes() {
+		// Post types
+		$post_types = get_post_types(
+			array(
+				'public' => true,
+				'_builtin' => false
+			)
+		);
+		$post_types[] = 'post';
+		$post_types[] = 'page';
+
+		// Add the metabox for each type
+		foreach ( $post_types as $type ) {
+			add_meta_box(
+				'capture-us-metabox',
+				__( 'Layout Settings', 'capture' ),
+				array( $this, 'capture_us_metabox' ),
+				$type,
+				'side',
+				'default'
+			);
+		}
+	}
+
+	/**
+	 * This function renders a metabox.
+	 */
+	function capture_us_metabox( $post ) {
+		// Get the post type label
+		$post_type = get_post_type_object( $post->post_type );
+		$label = ( isset( $post_type->labels->singular_name ) ) ? $post_type->labels->singular_name : __( 'Post' );
+
+		echo '<p class="howto">';
+		printf(
+			__( 'Looking to configure a unique layout for this %1$s? %2$s.', 'capture' ),
+			esc_html( strtolower( $label ) ),
+			sprintf(
+				'<a href="%1$s" target="_blank">Upgrade to Pro</a>',
+				esc_url( sds_get_pro_link( 'metabox-layout-settings' ) )
+			)
+		);
+		echo '</p>';
 	}
 
 	/**
@@ -245,6 +314,110 @@ class Capture {
 	<?php
 	}
 
+
+	/********************
+	 * Theme Customizer *
+	 ********************/
+
+	/**
+	 * This function sets background-color and background-image settings in Theme Customizer to use
+	 * the refresh method instead of postMessage.
+	 */
+	function customize_register( $wp_customize ) {
+		if ( get_theme_support( 'custom-background', 'wp-head-callback' ) === '_custom_background_cb' ) {
+			foreach ( array( 'color', 'image' ) as $prop ) {
+				$wp_customize->get_setting( 'background_' . $prop )->transport = 'refresh';
+			}
+		}
+
+		$wp_customize->add_section( 'capture_us', array(
+			'title' => __( 'Upgrade Capture', 'capture' ),
+			'priority' => 1
+		) );
+
+		$wp_customize->add_setting(
+			'capture_us', // IDs can have nested array keys
+			array(
+				'default' => false,
+				'type' => 'capture_us'
+			)
+		);
+
+		$wp_customize->add_control(
+			new WP_Customize_US_Control(
+				$wp_customize,
+				'capture_us',
+				array(
+					'content'  => sprintf(
+						__( '<strong>Premium support</strong>, more Customizer options, color schemes, web fonts, and more! %s.', 'capture' ),
+						sprintf(
+							'<a href="%1$s" target="_blank">%2$s</a>',
+							esc_url( sds_get_pro_link( 'customizer' ) ),
+							__( 'Upgrade to Pro', 'capture' )
+						)
+					),
+					'section' => 'capture_us',
+				)
+			)
+		);
+
+		$wp_customize->get_section( 'colors' )->description = sprintf(
+			__( 'Looking for more color customizations? %s.', 'capture' ),
+			sprintf(
+				'<a href="%1$s" target="_blank">%2$s</a>',
+				esc_url( sds_get_pro_link( 'customizer-colors' ) ),
+				__( 'Upgrade to Pro', 'capture' )
+			)
+		);
+	}
+
+	/**
+	 * This function is run when the Theme Customizer is printing styles.
+	 */
+	function customize_controls_print_styles() {
+	?>
+		<style type="text/css">
+			#accordion-section-capture_us .accordion-section-title,
+			#customize-theme-controls #accordion-section-capture_us .accordion-section-title:focus,
+			#customize-theme-controls #accordion-section-capture_us .accordion-section-title:hover,
+			#customize-theme-controls #accordion-section-capture_us .control-section.open .accordion-section-title,
+			#customize-theme-controls #accordion-section-capture_us:hover .accordion-section-title,
+			#accordion-section-capture_us .accordion-section-title:active {
+				background: #444;
+				color: #fff;
+			}
+
+			#accordion-section-capture_us .accordion-section-title:after,
+			#customize-theme-controls #accordion-section-capture_us .accordion-section-title:focus::after,
+			#customize-theme-controls #accordion-section-capture_us .accordion-section-title:hover::after,
+			#customize-theme-controls #accordion-section-capture_us.open .accordion-section-title::after,
+			#customize-theme-controls #accordion-section-capture_us:hover .accordion-section-title::after {
+				color: #fff;
+			}
+		</style>
+	<?php
+	}
+
+	/**
+	 * This function sets the default color for the content area in the Theme Customizer.
+	 */
+	function theme_mod_content_color( $color ) {
+		// Return the current color if set
+		if ( $color )
+			return $color;
+
+		// Return the selected color scheme content color if set
+		if ( $selected_color_scheme = sds_get_color_scheme() )
+			return $selected_color_scheme['content_color'];
+
+		// Load all color schemes for this theme
+		$color_schemes = sds_color_schemes();
+
+		// Return the default color scheme content color
+		return $color_schemes['default']['content_color'];
+	}
+
+
 	/**
 	 * This function handles Ajax/Backbone requests for the Capture Slideshow
 	 */
@@ -271,9 +444,7 @@ class Capture {
 				$current_image_index = 0;
 
 				// Ensure we have an array ordered by post date DESC
-				usort( $capture_slideshow_posts, function( $a, $b ) {
-					return strnatcmp( strtotime( $b->post_date ), strtotime( $a->post_date ) );
-				} );
+				usort( $capture_slideshow_posts, array( $this, 'sort_post_date_desc' ) );
 
 				foreach( $capture_slideshow_posts as $post ) {
 					$featured_image = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'full' );
@@ -359,7 +530,7 @@ class Capture {
 	/**
 	 * This function outputs Jetpack Share Buttons in post footers.
 	 */
-	function capture_post_footer_right( $post ){
+	function capture_post_footer_right( $post ) {
 		if( class_exists( 'Jetpack' ) && Jetpack::is_module_active( 'sharedaddy' ) && $post->post_type === 'post' )
 			echo sharing_display();
 	}
@@ -420,6 +591,18 @@ class Capture {
 	 */
 	function woocommerce_after_single_product_summary() {
 		woocommerce_related_products( 3, 3 );
+	}
+
+
+	/**********************
+	 * Internal Functions *
+	 **********************/
+
+	/**
+	 * This function sorts an arry of $post objects by post date in decending order.
+	 */
+	function sort_post_date_desc( $a, $b ) {
+		return strnatcmp( strtotime( $b->post_date ), strtotime( $a->post_date ) );
 	}
 }
 

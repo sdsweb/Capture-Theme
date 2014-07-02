@@ -13,6 +13,7 @@ include_once get_template_directory() . '/includes/class-tgm-plugin-activation.p
 
 include_once get_template_directory() . '/includes/theme-options.php'; // SDS Theme Options
 include_once get_template_directory() . '/includes/theme-functions.php'; // SDS Theme Options Functions
+include_once get_template_directory() . '/includes/class-customize-us-control.php'; // Customize Controller
 include_once get_template_directory() . '/includes/widget-social-media.php'; // SDS Social Media Widget
 
 
@@ -21,12 +22,6 @@ include_once get_template_directory() . '/includes/widget-social-media.php'; // 
  * Theme Specifics
  * ---------------
  */
-
-/**
- * Set the Content Width for embedded items.
- */
-if ( ! isset( $content_width ) )
-	$content_width = 1106;
 
 /**
  * This function registers all color schemes available in this theme.
@@ -38,12 +33,14 @@ if ( ! function_exists( 'sds_color_schemes' ) ) {
 				'label' => __( 'Default', 'capture' ), // Label on options panel (required)
 				'stylesheet' => false, // Stylesheet URL, relative to theme directory (required)
 				'preview' => '#222222', // Preview color on options panel (required)
+				'content_color' => '#333333', // Default content color (required)
 				'default' => true
 			),
 			'slocum-blue' => array(
 				'label' => __( 'Slocum Blue', 'capture' ),
 				'stylesheet' => '/css/slocum-blue.css',
 				'preview' => '#3c639a',
+				'content_color' => '#333333',
 				'deps' => 'capture'
 			)
 		);
@@ -94,13 +91,46 @@ if ( ! function_exists( 'sds_theme_options_default_featured_image_size' ) ) {
 	}
 }
 
+/**
+ * This function adds the custom Theme Customizer styles to the <head> tag.
+ */
+if ( ! function_exists( 'capture_wp_head' ) ) {
+	add_filter( 'wp_head', 'capture_wp_head', 20 );
+
+	function capture_wp_head() {
+		$sds_theme_options_instance = SDS_Theme_Options_Instance();
+	?>
+		<style type="text/css" id="<?php echo $sds_theme_options_instance->get_parent_theme()->get_template(); ?>-theme-customizer">
+			<?php if( $background_color = get_background_color() ) : ?>
+				/* Background Color */
+				.post:after, .post:before, .post-container:after, .post-container:before {
+					background-color: #<?php echo $background_color; ?>;
+				}
+			<?php endif; ?>
+
+			<?php if( $background = set_url_scheme( get_background_image() ) ) : ?>
+				/* Background Image */
+				.post:after, .post:before, .post-container:after, .post-container:before {
+					background-color: transparent;
+				}
+			<?php endif; ?>
+
+			/* Content Color */
+			article.content, .post-date, .post-footer .post-meta p, #post-author {
+				color: <?php echo get_theme_mod( 'content_color' ); ?>;
+			}
+		</style>
+	<?php
+	}
+}
+
 if ( ! function_exists( 'sds_theme_options_ads' ) ) {
 	add_action( 'sds_theme_options_ads', 'sds_theme_options_ads' );
 
 	function sds_theme_options_ads() {
 	?>
 		<div class="sds-theme-options-ad">
-			<a href="http://slocumthemes.com/wordpress-themes/capture/" target="_blank" class="sds-theme-options-upgrade-ad">
+			<a href="<?php echo esc_url( sds_get_pro_link( 'theme-options-ad' ) ); ?>" target="_blank" class="sds-theme-options-upgrade-ad">
 				<h3><?php _e( 'Upgrade to Capture Pro!', 'capture' ); ?></h3>
 				<ul>
 					<li><?php _e( 'Priority Ticketing Support', 'capture' ); ?></li>
@@ -126,22 +156,50 @@ if ( ! function_exists( 'sds_theme_options_upgrade_cta' ) ) {
 	function sds_theme_options_upgrade_cta( $type ) {
 		switch( $type ) :
 			case 'color-schemes':
-			?>
-				<p><?php printf( __( '%1$s and receive more color schemes!', 'capture' ), '<a href="http://slocumthemes.com/wordpress-themes/capture/" target="_blank">Upgrade to Capture Pro</a>' ); ?></p>
-			<?php
+		?>
+				<p>
+					<?php
+						printf( '<a href="%1$s" target="_blank">%2$s</a> %3$s',
+							esc_url( sds_get_pro_link( 'theme-options-colors' ) ),
+							__( 'Upgrade to Capture Pro', 'capture' ),
+							__( 'and receive more color schemes!', 'capture' )
+						);
+					?>
+				</p>
+		<?php
 			break;
 			case 'web-fonts':
-			?>
-				<p><?php printf( __( '%1$s to use more web fonts!', 'capture' ), '<a href="http://slocumthemes.com/wordpress-themes/capture/" target="_blank">Upgrade to Capture Pro</a>' ); ?></p>
-			<?php
+		?>
+				<p>
+					<?php
+						printf( '<a href="%1$s" target="_blank">%2$s</a> %3$s',
+							esc_url( sds_get_pro_link( 'theme-options-fonts' ) ),
+							__( 'Upgrade to Capture Pro', 'capture' ),
+							__( 'to use more web fonts!', 'capture' )
+						);
+					?>
+				</p>
+		<?php
 			break;
 			case 'help-support':
-			?>
-				<p><?php printf( __( '%1$s to receive priority ticketing support!', 'capture' ), '<a href="http://slocumthemes.com/wordpress-themes/capture/" target="_blank">Upgrade to Capture Pro</a>' ); ?></p>
-			<?php
+		?>
+				<p>
+					<?php
+						printf( '<a href="%1$s" target="_blank">%2$s</a> %3$s',
+							esc_url( sds_get_pro_link( 'theme-options-help' ) ),
+							__( 'Upgrade to Capture Pro', 'capture' ),
+							__( 'to receive priority ticketing support!', 'capture' )
+						);
+					?>
+				</p>
+		<?php
 			break;
 		endswitch;
 	}
+}
+
+function sds_get_pro_link( $content ) {
+	return esc_url( 'https://slocumthemes.com/wordpress-themes/capture/?utm_source=capture&utm_medium=link&utm_content=' . urlencode( sanitize_title_with_dashes( $content ) ) . '&utm_campaign=pro#purchase-theme' );
 }
 
 if ( ! function_exists( 'sds_theme_options_help_support_tab_content' ) ) {
