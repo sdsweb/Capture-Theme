@@ -103,7 +103,9 @@ if ( ! function_exists( 'capture_wp_head' ) ) {
 		<style type="text/css" id="<?php echo $sds_theme_options_instance->get_parent_theme()->get_template(); ?>-theme-customizer">
 			<?php if( $background_color = get_background_color() ) : ?>
 				/* Background Color */
-				.post:after, .post:before, .post-container:after, .post-container:before {
+				.post:after, .post:before, .post-container:after, .post-container:before,
+				.primary-sidebar-widget:before, .primary-sidebar-widget:after,
+				.widget-container:before, .widget-container:after {
 					background-color: #<?php echo $background_color; ?>;
 				}
 			<?php endif; ?>
@@ -263,6 +265,7 @@ function capture_mobile_menu() {
 				endif;
 			endforeach;
 		?>
+			<li class="social-media"><?php sds_social_media(); ?></li>
 		</ul>
 	<?php
 	else : // No nav menus set
@@ -281,6 +284,7 @@ function capture_mobile_menu() {
 				'title_li' => false
 			) );
 	?>
+			<li class="social-media"><?php sds_social_media(); ?></li>
 		</ul>
 	<?php
 	endif;

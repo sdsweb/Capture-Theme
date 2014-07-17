@@ -2,9 +2,18 @@
 Theme: Capture Free
 Author: Slocum Themes/Slocum Design Studio
 Author URI: http://slocumthemes.com
-Current Version: 1.1.4
+Current Version: 1.1.5
 ==========================================
 
+
+1.1.5 // July 17 2014
+---------------------
+- Added Gravity Forms .mc-gravity support
+- Fixed blurry display issue of WooCommerce shop thumbnails
+- Fixed bug where widget "tuck" effect did not recognize the Customizer background color property
+- Added social media display to responsive view navigation panel (was previously hidden on responsive views)
+- Adjusted CSS to ensure the top bar "sticks" to the top of the window on responsive views
+- Removed "Secondary Sidebar" for now as it was not used in this theme
 
 1.1.4 // July 02 2014
 ---------------------

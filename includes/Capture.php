@@ -3,7 +3,7 @@
  * This class manages all functionality with our Capture theme.
  */
 class Capture {
-	const CAPTURE_VERSION = '1.1.4';
+	const CAPTURE_VERSION = '1.1.5';
 
 	private static $instance; // Keep track of the instance
 
@@ -51,7 +51,7 @@ class Capture {
 		remove_action( 'woocommerce_after_main_content', 'woocommerce_output_content_wrapper_end', 10 ); // Remove default WooCommerce content wrapper
 		add_action( 'woocommerce_before_main_content', array( $this, 'woocommerce_before_main_content' ) ); // Add Capture WooCommerce content wrapper
 		add_action( 'woocommerce_after_main_content', array( $this, 'woocommerce_after_main_content' ) ); // Add Capture WooCommerce content wrapper
-		add_filter( 'woocommerce_catalog_settings', array( $this, 'woocommerce_catalog_settings' ) ); // Adjust default WooCommerce catalog settings
+		add_filter( 'woocommerce_product_settings', array( $this, 'woocommerce_product_settings' ) ); // Adjust default WooCommerce product settings
 		add_filter( 'loop_shop_per_page', array( $this, 'loop_shop_per_page' ), 20 ); // Adjust number of items displayed on a catalog page
 		remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_output_related_products', 20 ); // Remove default WooCommerce related products
 		add_action( 'woocommerce_after_single_product_summary', array( $this, 'woocommerce_after_single_product_summary' ), 20 ); // Add WooCommerce related products (3x3)
@@ -124,6 +124,7 @@ class Capture {
 		unregister_sidebar( 'front-page-slider-sidebar' );
 		unregister_sidebar( 'front-page-sidebar' );
 		unregister_sidebar( 'header-call-to-action-sidebar' );
+		unregister_sidebar( 'secondary-sidebar' );
 		unregister_sidebar( 'footer-sidebar' );
 	}
 
@@ -312,6 +313,17 @@ class Capture {
 			// ]]>
 		</script>
 	<?php
+
+		// Mobile menu styling for logged in users with the admin bar
+		if ( is_admin_bar_showing() ) :
+	?>
+			<style type="text/css">
+				.top-bar, .mobile-menu {
+					top: 46px;
+				}
+			</style>
+	<?php
+		endif;
 	}
 
 
@@ -564,17 +576,14 @@ class Capture {
 
 
 	/**
-	 * This function adjusts the default WooCommerce Catalog settings.
+	 * This function adjusts the default WooCommerce Product settings.
 	 */
-	function woocommerce_catalog_settings( $settings ) {
-		if ( is_array( $settings ) ) {
-			foreach( $settings as &$setting ) {
+	function woocommerce_product_settings( $settings ) {
+		if ( is_array( $settings ) )
+			foreach( $settings as &$setting )
 				// Adjust the default value of the Catalog image size
-				if( $setting['id'] === 'shop_catalog_image_size' ) {
+				if( $setting['id'] === 'shop_catalog_image_size' )
 					$setting['default']['width'] = $setting['default']['height'] = 300;
-				}
-			}
-		}
 
 		return $settings;
 	}

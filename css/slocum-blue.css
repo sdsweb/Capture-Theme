@@ -207,6 +207,18 @@ ul.page-numbers li a.page-numbers:active {
 	background: #0c2344 !important;
 }
 
+/* Newsletter */
+.mc-gravity .gform_heading, .mc_gravity .gform_heading, .mc-newsletter .gform_heading, .mc_newsletter .gform_heading,
+.mc-gravity_wrapper .gform_heading, .mc_gravity_wrapper .gform_heading, .mc-newsletter_wrapper .gform_heading, .mc_newsletter_wrapper .gform_heading {
+	background: #3c639a;
+	color: #fff;
+}
+
+.mc-gravity-confirmation, .mc_gravity-confirmation, .mc-newsletter-confirmation, .mc_newsletter-confirmation {
+	background: #3c639a;
+	color: #fff;
+}
+
 
 @media only screen and (max-width : 768px) {
 	.top-bar {
