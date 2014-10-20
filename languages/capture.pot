@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Capture 1.1.6\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/support/theme/capture\n"
-"POT-Creation-Date: 2014-10-14 19:41:49+00:00\n"
+"POT-Creation-Date: 2014-10-20 20:42:34+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -111,35 +111,55 @@ msgstr ""
 msgid "Upgrade Now!"
 msgstr ""
 
-#: functions.php:166 functions.php:179 functions.php:192
+#: functions.php:154
+msgid "Introducing Conductor Plugin"
+msgstr ""
+
+#: functions.php:156
+msgid "Custom Layouts"
+msgstr ""
+
+#: functions.php:157
+msgid "Custom Content Displays"
+msgstr ""
+
+#: functions.php:158
+msgid "No Code Required!"
+msgstr ""
+
+#: functions.php:161
+msgid "Get Conductor!"
+msgstr ""
+
+#: functions.php:179 functions.php:192 functions.php:205
 msgid "Upgrade to Capture Pro"
 msgstr ""
 
-#: functions.php:167
+#: functions.php:180
 msgid "and receive more color schemes!"
 msgstr ""
 
-#: functions.php:180
+#: functions.php:193
 msgid "to use more web fonts!"
 msgstr ""
 
-#: functions.php:193
+#: functions.php:206
 msgid "to receive priority ticketing support!"
 msgstr ""
 
-#: functions.php:212
+#: functions.php:225
 msgid "If you'd like to create a support request, please visit the %1$s."
 msgstr ""
 
-#: functions.php:221
+#: functions.php:234
 msgid "%1$s by Slocum Studio"
 msgstr ""
 
-#: functions.php:246 functions.php:281
+#: functions.php:259 functions.php:294
 msgid "Close"
 msgstr ""
 
-#: functions.php:284
+#: functions.php:297
 msgid "%1$s"
 msgstr ""
 
