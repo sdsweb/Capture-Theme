@@ -3,7 +3,7 @@
  * This class manages all functionality with our Capture theme.
  */
 class Capture {
-	const CAPTURE_VERSION = '1.1.5';
+	const CAPTURE_VERSION = '1.1.6';
 
 	private static $instance; // Keep track of the instance
 
@@ -45,6 +45,10 @@ class Capture {
 
 		// Capture Theme Hooks
 		add_action( 'capture_post_footer_right', array( $this, 'capture_post_footer_right' ) ); // Output Jetpack Share Buttons
+
+		// Gravity Forms
+		add_filter( 'gform_field_input', array( $this, 'gform_field_input' ), 10, 5 ); // Add placholder to newsletter form
+		add_filter( 'gform_confirmation', array( $this, 'gform_confirmation' ), 10, 4 ); // Change confirmation message on newsletter form
 
 		// WooCommerce
 		remove_action( 'woocommerce_before_main_content', 'woocommerce_output_content_wrapper', 10 ); // Remove default WooCommerce content wrapper
@@ -123,7 +127,6 @@ class Capture {
 		// Unregister unused sidebars which are registered in SDS Core
 		unregister_sidebar( 'front-page-slider-sidebar' );
 		unregister_sidebar( 'front-page-sidebar' );
-		unregister_sidebar( 'header-call-to-action-sidebar' );
 		unregister_sidebar( 'secondary-sidebar' );
 		unregister_sidebar( 'footer-sidebar' );
 	}
@@ -351,7 +354,8 @@ class Capture {
 			'capture_us', // IDs can have nested array keys
 			array(
 				'default' => false,
-				'type' => 'capture_us'
+				'type' => 'capture_us',
+				'sanitize_callback' => 'sanitize_text_field'
 			)
 		);
 
@@ -548,6 +552,40 @@ class Capture {
 	}
 
 
+	/*****************
+	 * Gravity Forms *
+	 *****************/
+
+	/**
+	 * This function adds the HTML5 placeholder attribute to forms with a CSS class of the following:
+	 * .mc-gravity, .mc_gravity, .mc-newsletter, .mc_newsletter classes
+	 */
+	function gform_field_input( $input, $field, $value, $lead_id, $form_id ) {
+		$form_meta = RGFormsModel::get_form_meta( $form_id );
+		$form_css_classes = explode( ' ', $form_meta['cssClass'] );
+
+		// Ensure the current form has one of our supported classes and alter the field accordingly if we're not on admin
+		if ( isset( $form['cssClass'] ) && ! is_admin() && in_array( $form_css_classes, array( 'mc-gravity', 'mc_gravity', 'mc-newsletter', 'mc_newsletter' ) ) )
+			$input = '<div class="ginput_container"><input name="input_' . $field['id'] . '" id="input_' . $form_id . '_' . $field['id'] . '" type="text" value="" class="large" placeholder="' . $field['label'] . '" /></div>';
+
+		return $input;
+	}
+
+	/**
+	 * This function alters the confirmation message on forms with a CSS class of the following:
+	 * .mc-gravity, .mc_gravity, .mc-newsletter, .mc_newsletter classes
+	 */
+	function gform_confirmation( $confirmation, $form, $lead, $ajax ) {
+		$form_css_classes = explode( ' ', $form['cssClass'] );
+
+		// Confirmation message is set and form has one of our supported classes (alter the confirmation accordingly)
+		if ( isset( $form['cssClass'] ) && $form['confirmation']['type'] === 'message' && in_array( $form_css_classes, array( 'mc-gravity', 'mc_gravity', 'mc-newsletter', 'mc_newsletter' ) ) )
+			$confirmation = '<section class="mc-gravity-confirmation mc_gravity-confirmation mc-newsletter-confirmation mc_newsletter-confirmation">' . $confirmation . '</section>';
+
+		return $confirmation;
+	}
+
+
 	/***************
 	 * WooCommerce *
 	 ***************/
@@ -599,7 +637,10 @@ class Capture {
 	 * This function changes the number of related products displayed on a single product page.
 	 */
 	function woocommerce_after_single_product_summary() {
-		woocommerce_related_products( 3, 3 );
+		woocommerce_related_products( array(
+			'posts_per_page' => 3,
+			'columns' => 3
+		) );
 	}
 
 
@@ -608,7 +649,7 @@ class Capture {
 	 **********************/
 
 	/**
-	 * This function sorts an arry of $post objects by post date in decending order.
+	 * This function sorts an array of $post objects by post date in descending order.
 	 */
 	function sort_post_date_desc( $a, $b ) {
 		return strnatcmp( strtotime( $b->post_date ), strtotime( $a->post_date ) );

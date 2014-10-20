@@ -4,7 +4,7 @@
  * Description: A simple lightweight and responsive WordPress theme designed with photographers and videographers in mind. Capture offers a fullscreen featured image slideshow built using cutting-edge technology, lightweight SVG assets, and offers featured video support. Capture also offers full support for WooCommerce e-commerce. Capture your memories today.
  * Author: Slocum Design Studio (Scott Sousa)
  * Author URI: http://slocumstudio.com/
- * Version: 1.1.5
+ * Version: 1.1.6
  * License: GPL2+
  * License URI: http://www.gnu.org/licenses/gpl.html
  * Tags: blue, green, orange, pink, purple, red, white, light, two-columns, left-sidebar, fluid-layout, custom-colors, custom-menu, editor-style, featured-images, full-width-template, sticky-post, theme-options, threaded-comments, responsive-layout, translation-ready
@@ -253,10 +253,18 @@ hr {
 	clear: both;
 }
 
+select {
+	padding: 0.35em;
+}
+
 /* WordPress Galleries */
 .gallery-icon a {
 	position: relative;
 	display: inline-block;
+}
+
+.ie8 .gallery-icon a {
+	display: block;
 }
 
 .gallery-icon a:hover .slideshow-overlay {
@@ -300,7 +308,7 @@ body > .social-media-icons {
 	position: fixed;
 	top: 20px;
 	right: 20px;
-	z-index: 22;
+	z-index: 50;
 }
 
 body > .social-media-icons a {
@@ -376,15 +384,52 @@ body > .social-media-icons a:hover {
 	color: #555;
 }
 
-
 .site-title-logo + .slogan {
 	margin-top: 0.25em;
 	margin-bottom: 0.5em;
 }
 
-.nav-button, .top-bar, .mobile-nav-button, .mobile-menu { display: none; } /* hide the navigation & button by default */
+/* Header Call to Action */
+.header-call-to-action {
+	text-align: center;
+}
+
+.header-call-to-action #searchform {
+	max-width: 50%;
+	margin: 1em auto;
+}
+
+.header-call-to-action #searchform input[type=text] {
+	width: 50%;
+}
+
+.header-call-to-action #searchform input[type=submit] {
+	width: 24%;
+}
+
+.header-call-to-action .social-media-icons {
+	margin-top: 1em;
+}
+
+.header-call-to-action .social-media-icons a {
+	min-width: 20px;
+	margin-bottom: 2%;
+	padding: 20px;
+	color: #333;
+	font-size: 20px;
+	text-align: center;
+	box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.25);
+	-webkit-transition: all .25s ease-in-out;
+	-moz-transition: all .25s ease-in-out;
+	-ms-transition: all .25s ease-in-out;
+	-o-transition: all .25s ease-in-out;
+	transition: all .25s ease-in-out;
+	border-bottom: none;
+}
 
 /* Primary Nav */
+.nav-button, .top-bar, .mobile-nav-button, .mobile-menu { display: none; } /* hide the mobile navigation & button by default */
+
 .primary-nav-container {
 	margin-top: 10px;
 	margin-bottom: 20px;
@@ -2359,6 +2404,16 @@ ul.woocommerce-error {
 		transform: translatex(50%);
 	}
 
+	.header-call-to-action #searchform {
+		max-width: 80%;
+	}
+
+	.header-call-to-action .social-media-icons a {
+		width: 8px;
+		padding: 10px;
+		font-size: 18px;
+	}
+
 	#primary-nav, .primary-nav-container .primary-nav {
 		display: none;
 	}
@@ -2711,6 +2766,14 @@ ul.woocommerce-error {
 
 	.slogan {
 		font-size: 18px;
+	}
+
+	.header-call-to-action #searchform {
+		max-width: 100%;
+	}
+
+	.header-call-to-action #searchform input[type=submit] {
+		width: 32%;
 	}
 	
 	section.breadcrumb {

@@ -1,14 +1,24 @@
 ==========================================
 Theme: Capture Free
 Author: Slocum Themes/Slocum Design Studio
-Author URI: http://slocumthemes.com
-Current Version: 1.1.5
+Author URI: http://slocumthemes.com/
+Current Version: 1.1.6
 ==========================================
 
 
+1.1.6 // October 20 2014
+------------------------
+- Updated to latest version of SDS Core
+- Fixed overlap of Primary Menu on Social Media Icons
+- Added CSS classes on sidebar containers for better CSS targeting (added "widgets" and "no-widgets" classes)
+- Added minimal IE8 support (prevents white screen issue; issue was due to SVG assets and Capture Slideshow JS)
+- Adjusted WooCommerce support functionality (adjust deprecated argument in woocommerce_related_products() function)
+- Added Gravity Forms .mc-gravity support
+- Added Header Call to Action Sidebar support
+- Updated POT file
+
 1.1.5 // July 17 2014
 ---------------------
-- Added Gravity Forms .mc-gravity support
 - Fixed blurry display issue of WooCommerce shop thumbnails
 - Fixed bug where widget "tuck" effect did not recognize the Customizer background color property
 - Added social media display to responsive view navigation panel (was previously hidden on responsive views)

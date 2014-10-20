@@ -225,10 +225,10 @@
 			CaptureSlideshowRouter = Backbone.Router.extend( {
 				prev_url_path: false,
 				routes: {
-					'*notFound': 'default',
-					'': 'default'
+					'*notFound': 'defaultRoute',
+					'': 'defaultRoute'
 				},
-				default: function( path ) {
+				defaultRoute: function( path ) {
 					// Determine if user has clicked the back/forward buttons
 					// In the future we'll use backbone to actually navigate in this case
 					if ( pushState && this.prev_url_path && path !== this.prev_url_path ) {
