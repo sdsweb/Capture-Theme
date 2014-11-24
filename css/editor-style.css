@@ -6,7 +6,7 @@
  * We've used Eric Meyer's reset as a base and modified it a bit to suit our needs.
  */
 html,body, div, dl, dt, dd, ul, li,
-pre, form, fieldset, input, textarea, blockquote, th, td, section, figure { 
+pre, form, fieldset, input, textarea, blockquote, th, td, section, figure {
 	margin: 0;
 	padding: 0;
 	-webkit-font-smoothing: antialiased;
@@ -20,7 +20,7 @@ pre {
 	white-space: pre-wrap;
 }
 
-fieldset, img, abbr, acronym  { 
+fieldset, img, abbr, acronym  {
 	border: 0;
 }
 
@@ -54,7 +54,7 @@ q:before, q:after {
 ul {
 	list-style: none;
 }
-	
+
 mark{
 	background: none;
 }
@@ -71,87 +71,87 @@ button{
  *
  * We've modified this to suit our needs.
  */
- 
+
 .alignnone {
-    margin: 5px 18px 15px 0;
+	margin: 5px 18px 15px 0;
 }
 
 .aligncenter,
 div.aligncenter {
-    display: block;
-    margin: 5px auto;
+	display: block;
+	margin: 5px auto;
 }
 
 .alignright {
-    float:right;
-    margin: 5px 0 15px 18px;
+	float:right;
+	margin: 5px 0 15px 18px;
 }
 
 .alignleft {
-    float: left;
-    margin: 5px 18px 15px 0;
+	float: left;
+	margin: 5px 18px 15px 0;
 }
 
 .aligncenter {
-    display: block;
-    margin: 5px auto;
+	display: block;
+	margin: 5px auto;
 }
 
 a img.alignright {
-    float: right;
-    margin: 5px 0 15px 18px;
+	float: right;
+	margin: 5px 0 15px 18px;
 }
 
 a img.alignnone {
-    margin: 5px 18px 15px 0;
+	margin: 5px 18px 15px 0;
 }
 
 a img.alignleft {
-    float: left;
-    margin: 5px 18px 15px 0;
+	float: left;
+	margin: 5px 18px 15px 0;
 }
 
 a img.aligncenter {
-    display: block;
-    margin-left: auto;
-    margin-right: auto
+	display: block;
+	margin-left: auto;
+	margin-right: auto
 }
 
 .wp-caption, .gallery-caption {
-    background: #eee;
-    border: 1px solid #e6e6e6;
-    max-width: 96%; /* Image does not overflow the content area */
-    padding: 0.75% 3px 10px;
-    text-align: center;
+	background: #eee;
+	border: 1px solid #e6e6e6;
+	max-width: 96%; /* Image does not overflow the content area */
+	padding: 0.75% 3px 10px;
+	text-align: center;
 	clear: both;
 }
 
 .wp-caption.alignnone {
-    margin: 5px 20px 20px 0;
+	margin: 5px 20px 20px 0;
 }
 
 .wp-caption.alignleft {
-    margin: 5px 20px 20px 0;
+	margin: 5px 20px 20px 0;
 }
 
 .wp-caption.alignright {
-    margin: 5px 0 20px 20px;
+	margin: 5px 0 20px 20px;
 }
 
 .wp-caption img, .gallery-caption img {
-    border: 0 none;
-    height: auto;
-    margin: 0;
-    max-width: 98.5%;
-    padding: 0;
-    width: auto;
+	border: 0 none;
+	height: auto;
+	margin: 0;
+	max-width: 98.5%;
+	padding: 0;
+	width: auto;
 }
 
 .wp-caption p.wp-caption-text {
-    font-size: 14px;
-    line-height: 25px;
-    margin: 2px 0 0;
-    padding: 0 4px 0;
+	font-size: 14px;
+	line-height: 25px;
+	margin: 2px 0 0;
+	padding: 0 4px 0;
 }
 
 
@@ -159,15 +159,18 @@ a img.aligncenter {
  * Theme Styles
  */
 
-body{
+body, body.wp-autoresize {
 	max-width: 1200px;
-	padding: 15px;
+	padding-left: 3% !important;
+	padding-right: 3% !important;
 	color: #333;
 	font-family: 'Open Sans', sans-serif;
 	font-size: 16px;
+	line-height: normal;
+	box-sizing: border-box;
 }
 
-a{
+a {
 	color: #222;
 	font-weight: bold;
 }
@@ -242,11 +245,13 @@ table {
 th {
 	padding: 5px;
 	background: #f9f9f9;
+	font-size: 16px;
 	border: 1px solid #ddd;
 }
 
 td {
 	padding: 5px;
+	font-size: 16px;
 	border: 1px solid #ddd;
 }
 

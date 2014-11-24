@@ -2,9 +2,23 @@
 Theme: Capture Free
 Author: Slocum Themes/Slocum Design Studio
 Author URI: http://slocumthemes.com/
-Current Version: 1.1.6
+Current Version: 1.1.7
 ==========================================
 
+
+1.1.7 // November 24 2014
+-------------------------
+- Updated to latest version of SDS Core
+- Updated editor-style.css to better account for new core WordPress editor CSS adjustments in 4.0
+- Changed add_filter() function on 'wp_head' action to add_action()
+- Added WordPress 4.1 title-tag support and moved all meta tags from <head> element to 'wp_head'
+- Reorganized file structure
+- Updated theme description
+- Fixed functionality on mobile menu for showing/hiding sub menu items
+- Fixed social media icon output in mobile menu
+- Minor adjustments to CSS
+- Fixed possible PHP warning with "mc-gravity" Gravity Forms functionality
+- Fixed "mc-gravity" functionality for checking if form contained correct CSS classes
 
 1.1.6 // October 20 2014
 ------------------------

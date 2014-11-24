@@ -11,8 +11,8 @@ hr {
 }
 
 .wp-caption, .gallery-caption {
-    background: #e7f2ff;
-    border: 1px solid #cedff3;
+	background: #e7f2ff;
+	border: 1px solid #cedff3;
 }
 
 blockquote {
@@ -45,12 +45,12 @@ input, textarea {
 	border-bottom-color: #123566;
 }
 
-body > .social-media-icons a {
+body > .social .social-media-icons a, body > .social .social-media-button {
 	color: #3c639a;
 	background: #fff;
 }
 
-body > .social-media-icons a:hover {
+body > .social .social-media-icons a:hover, body > .social .social-media-button:hover {
 	color: #123566;
 	background: #e8f2fe;
 }
@@ -203,7 +203,7 @@ ul.page-numbers li a.page-numbers:active {
 	background: #123566 !important;
 }
 
- .woocommerce nav.woocommerce-pagination ul li a:active, .woocommerce nav.woocommerce-pagination ul li a:active, .woocommerce #content nav.woocommerce-pagination ul li a:active, .woocommerce #content nav.woocommerce-pagination ul li a:active, .woocommerce-page nav.woocommerce-pagination ul li a:active, .woocommerce-page nav.woocommerce-pagination ul li a:active, .woocommerce-page #content nav.woocommerce-pagination ul li a:active, .woocommerce-page #content nav.woocommerce-pagination ul li a:active {
+.woocommerce nav.woocommerce-pagination ul li a:active, .woocommerce nav.woocommerce-pagination ul li a:active, .woocommerce #content nav.woocommerce-pagination ul li a:active, .woocommerce #content nav.woocommerce-pagination ul li a:active, .woocommerce-page nav.woocommerce-pagination ul li a:active, .woocommerce-page nav.woocommerce-pagination ul li a:active, .woocommerce-page #content nav.woocommerce-pagination ul li a:active, .woocommerce-page #content nav.woocommerce-pagination ul li a:active {
 	background: #0c2344 !important;
 }
 
@@ -243,6 +243,11 @@ ul.page-numbers li a.page-numbers:active {
 
 	.mobile-menu li {
 		border-bottom: 1px solid #587bac;
+	}
+
+	.mobile-menu li li, .mobile-menu li li li {
+		border-top: 1px solid #587bac;
+		border-bottom: none;
 	}
 
 	.mobile-menu li a:hover {
