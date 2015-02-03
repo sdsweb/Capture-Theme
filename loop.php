@@ -29,7 +29,7 @@
 			<section class="post-title-wrap cf <?php echo ( has_post_thumbnail() ) ? 'post-title-wrap-featured-image' : 'post-title-wrap-no-image'; ?>">
 				<h1 class="post-title"><?php the_title(); ?></h1>
 				<p class="post-date">
-					<?php the_time( 'F jS, Y' ); ?>
+					<?php the_time( get_option( 'date_format' ) ); ?>
 				</p>
 			</section>
 

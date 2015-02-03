@@ -58,35 +58,35 @@
 /**
  * Menu Icon SVG - /images/menu-icon.svg
  * License: GPL2
- * Copyright: Slocum Studio, http://slocumthemes.com/
+ * Copyright: Slocum Studio, https://slocumthemes.com/
  */
 
 /**
  * Close Icon SVG - /images/close-icon.svg
  * License: GPL2
- * Copyright: Slocum Studio, http://slocumthemes.com/
+ * Copyright: Slocum Studio, https://slocumthemes.com/
  */
 
 /**
  * Fullscreen SVG - /images/fullscreen-icon.svg
  * License: GPL2
- * Copyright: Slocum Studio, http://slocumthemes.com/
+ * Copyright: Slocum Studio, https://slocumthemes.com/
  */
 
 /**
  * Slideshow SVG - /images/slideshow-icon.svg
  * License: GPL2
- * Copyright: Slocum Studio, http://slocumthemes.com/
+ * Copyright: Slocum Studio, https://slocumthemes.com/
  */
 
 /**
  * Prev SVG - /images/prev.svg
  * License: GPL2
- * Copyright: Slocum Studio, http://slocumthemes.com/
+ * Copyright: Slocum Studio, https://slocumthemes.com/
  */
 
 /**
  * Next SVG - /images/next.svg
  * License: GPL2
- * Copyright: Slocum Studio, http://slocumthemes.com/
+ * Copyright: Slocum Studio, https://slocumthemes.com/
  */

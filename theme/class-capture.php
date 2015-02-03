@@ -3,7 +3,7 @@
  * This class manages all functionality with our Capture theme.
  */
 class Capture {
-	const CAPTURE_VERSION = '1.1.7';
+	const CAPTURE_VERSION = '1.1.9';
 
 	private static $instance; // Keep track of the instance
 
@@ -184,12 +184,12 @@ class Capture {
 	 * It will also enqueue the correct color scheme stylesheet to better match front-end display.
 	 */
 	function pre_get_posts() {
-		global $sds_theme_options, $post;
+		global $sds_theme_options;
 
 		$protocol = is_ssl() ? 'https' : 'http';
 
 		// Admin only and if we have a post
-		if ( is_admin() && ! empty( $post ) ) {
+		if ( is_admin() ) {
 			add_editor_style( 'css/editor-style.css' );
 
 			// Add correct color scheme if selected
@@ -292,19 +292,21 @@ class Capture {
 		<script type="text/javascript">
 			// <![CDATA[
 				jQuery( function( $ ) {
+					var $capture_mobile_elements = $( '.mobile-nav-button, .mobile-nav, html, body' );
+
 					// Mobile Nav
 					$( '.mobile-nav-button' ).on( 'touch click', function ( e ) {
 						e.stopPropagation();
-						$( '.mobile-nav-button, .mobile-nav, body' ).toggleClass( 'open' );
+						$capture_mobile_elements.toggleClass( 'open' );
 					} );
 
 					$( '.mobile-nav-close-button' ).on( 'touch click', function ( e ) {
 						e.stopPropagation();
-						$( '.mobile-nav-button, .mobile-nav, body' ).removeClass( 'open' );
+						$capture_mobile_elements.removeClass( 'open' );
 					} );
 
 					$( document ).on( 'touch click', function() {
-						$( '.mobile-nav-button, .mobile-nav, body' ).removeClass( 'open' );
+						$capture_mobile_elements.removeClass( 'open' );
 					} );
 
 					<?php if ( is_single() && has_post_thumbnail() ) : // Single Posts with Featured Images ?>
@@ -485,7 +487,7 @@ class Capture {
 						'post' => array(
 							'id' => $post->ID,
 							'title' => $post->post_title,
-							'date' => sprintf( __( 'Posted On %1$s', 'capture' ) , get_the_time( 'F jS, Y', $post->ID ) ),
+							'date' => sprintf( __( 'Posted On %1$s', 'capture' ) , get_the_time( get_option( 'date_format' ), $post->ID ) ),
 							'timestamp' => strtotime( $post->post_date ),
 							'permalink' => str_replace( $protocol . '://' . $_SERVER['SERVER_NAME'], '', get_permalink( $post->ID ) ) // Just return the URI
 						),

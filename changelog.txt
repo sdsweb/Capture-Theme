@@ -2,9 +2,19 @@
 Theme: Capture Free
 Author: Slocum Themes/Slocum Design Studio
 Author URI: http://slocumthemes.com/
-Current Version: 1.1.7
+Current Version: 1.1.9
 ==========================================
 
+
+1.1.9 // January 30 2015
+------------------------
+- Updated to latest version of SDS Core
+- Fixed issue where editor styles were not loaded correctly when new content was created
+- Added screen reader CSS declarations
+- Updated Slocum Themes links throughout theme
+- Updated the_time() function to reference date format specified in settings
+- Adjusted mobile navigation functionality (stop scrolling from occurring when menu is open)
+- Updated button CSS (removed float)
 
 1.1.7 // November 24 2014
 -------------------------

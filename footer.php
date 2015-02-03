@@ -1,22 +1,23 @@
-	</div>
-
-	<!-- Footer -->
-		<footer id="footer">
-			<div class="in">
-				<section class="copyright-area <?php echo ( is_active_sidebar( 'copyright-area-sidebar' ) ) ? 'widgets' : 'no-widgets'; ?>">
-					<?php sds_copyright_area_sidebar(); ?>
-				</section>
 			</div>
 
-			<section class="copyright">
+			<!-- Footer -->
+			<footer id="footer">
 				<div class="in">
-					<p class="copyright-message">
-						<?php sds_copyright( 'Capture' ); ?>
-					</p>
+					<section class="copyright-area <?php echo ( is_active_sidebar( 'copyright-area-sidebar' ) ) ? 'widgets' : 'no-widgets'; ?>">
+						<?php sds_copyright_area_sidebar(); ?>
+					</section>
 				</div>
-			</section>
-		</footer>
 
+				<section class="copyright">
+					<div class="in">
+						<p class="copyright-message">
+							<?php sds_copyright( 'Capture' ); ?>
+						</p>
+					</div>
+				</section>
+			</footer>
+
+		</div>
 		<?php wp_footer(); ?>
 	</body>
 </html>

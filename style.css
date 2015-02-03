@@ -1,15 +1,15 @@
 /**
  * Theme Name: Capture
- * Theme URI: http://slocumthemes.com/wordpress-themes/capture-free/
+ * Theme URI: https://slocumthemes.com/wordpress-themes/capture-free/
  * Description: A simple lightweight and responsive WordPress theme designed with photographers and videographers in mind. Capture offers a fullscreen featured image slideshow built using cutting-edge technology, lightweight SVG assets, and offers featured video support. Capture also offers full support for WooCommerce e-commerce. Capture your memories today. Now supports live front-end text widget editing via <a href="http://wordpress.org/plugins/note/" target="_blank">Note</a>. More info - <a href="http://wordpress.org/plugins/note/" target="_blank">http://wordpress.org/plugins/note/</a>.
  * Author: Slocum Design Studio (Scott Sousa)
- * Author URI: http://slocumstudio.com/
- * Version: 1.1.7
+ * Author URI: https://slocumstudio.com/
+ * Version: 1.1.9
  * License: GPL2+
  * License URI: http://www.gnu.org/licenses/gpl.html
  * Tags: blue, green, orange, pink, purple, red, white, light, two-columns, left-sidebar, fluid-layout, custom-colors, custom-menu, editor-style, featured-images, full-width-template, sticky-post, theme-options, threaded-comments, responsive-layout, translation-ready
 
- * Capture WordPress theme, Copyright (C) 2013 Slocum Studio
+ * Capture WordPress theme, Copyright (C) 2013-2015 Slocum Studio
  * Capture WordPress theme is licensed under the GPL.
 
  * @see attribution.txt for more license information.
@@ -169,6 +169,37 @@ a img.aligncenter {
     line-height: 25px;
     margin: 2px 0 0;
     padding: 0 4px 0;
+}
+
+/* Text meant only for screen readers. */
+.screen-reader-text {
+	clip: rect(1px, 1px, 1px, 1px);
+	position: absolute !important;
+	height: 1px;
+	width: 1px;
+	overflow: hidden;
+}
+
+.screen-reader-text:hover,
+.screen-reader-text:active,
+.screen-reader-text:focus {
+	background-color: #f1f1f1;
+	border-radius: 3px;
+	box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.6);
+	clip: auto !important;
+	color: #21759b;
+	display: block;
+	font-size: 14px;
+	font-size: 0.875rem;
+	font-weight: bold;
+	height: auto;
+	left: 5px;
+	line-height: normal;
+	padding: 15px 23px 14px;
+	text-decoration: none;
+	top: 5px;
+	width: auto;
+	z-index: 100000; /* Above WP toolbar. */
 }
 
 
@@ -1229,6 +1260,10 @@ form.mc-gravity, form.mc_gravity, form.mc-newsletter, form.mc_newsletter {
 	text-align: center;
 }
 
+.single-image a.post-edit-link {
+	float: left;
+}
+
 a.more-link, a.read-more, a.post-edit-link, .button,
 .post-navigation .previous-posts a, .post-navigation .next-posts a,
 .comment-reply-link, .comment-navigation a, #cancel-comment-reply-link, .comments-container #submit,
@@ -1242,7 +1277,7 @@ button, input[type=reset], input[type=submit] {
 	font-size: 16px;
 	font-weight: 300;
 	border-radius: 3px;
-	float: left;
+	display: inline-block;
 	clear: both;
 	cursor: pointer;
 
@@ -1280,8 +1315,8 @@ button:active, input[type=reset]:active, input[type=submit]:active {
 	float: none;
 }
 
-.post-navigation .next-posts a {
-	float: right;
+.post-navigation .next-posts {
+	text-align: right;
 }
 
 .post-author {
@@ -1627,7 +1662,7 @@ h5.comments-title {
 }
 
 
-.comment-navigation .nav-next a {
+.comment-navigation .nav-next {
 	float: right;
 }
 
@@ -2399,7 +2434,7 @@ ul.woocommerce-error {
 		padding-top: 54px;
 	}
 
-	body #header, body > div.in, body #footer{
+	body #header, body .wrapper > div.in, body #footer {
 		-webkit-transition: all .25s ease-in-out;
 		-moz-transition: all .25s ease-in-out;
 		-ms-transition: all .25s ease-in-out;
@@ -2407,13 +2442,17 @@ ul.woocommerce-error {
 		transition: all .25s ease-in-out;
 	}
 
-	body.open {
+	html.open, body.open, body.open .wrapper {
 		/*width: 100%;
 		position: fixed;*/
 		overflow: hidden;
 	}
 
-	body.open #header, body.open > div.in, body.open #footer{
+	body.open .wrapper {
+		position: fixed;
+	}
+
+	body.open #header, body.open .wrapper > div.in, body.open #footer {
 		-webkit-transform: translatex(50%);
 		-moz-transform: translatex(50%);
 		-ms-transform: translatex(50%);
@@ -2764,7 +2803,6 @@ ul.woocommerce-error {
 	.mc-newsletter_wrapper .gform_body, .mc_newsletter_wrapper .gform_body {
 		width: 50%;
 		margin: 0 0 0 10%;
-
 	}
 
 	.mc-gravity .gform_footer, .mc_gravity .gform_footer,
@@ -2981,6 +3019,10 @@ ul.woocommerce-error {
 		width: 35%;
 		margin: 0 5% 0 0 !important;
 	}
+
+	input {
+		width: 98%;
+	}
 }
 
 /* Capture Slideshow */
@@ -2996,7 +3038,7 @@ ul.woocommerce-error {
 }
 
 @media only screen and (max-width: 420px) {
-	body.open #header, body.open > div.in, body.open #footer{
+	body.open #header, body.open .wrapper > div.in, body.open #footer {
 		-webkit-transform: translatex(80%);
 		-moz-transform: translatex(80%);
 		-ms-transform: translatex(80%);

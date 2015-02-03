@@ -1,5 +1,5 @@
 <?php
-	global $multipage;
+	global $multipage, $post;
 
 	// Loop through posts
 	if ( have_posts() ) :
@@ -28,7 +28,9 @@
 					?>
 				</p>
 
-				<a href="<?php echo get_permalink( $post->post_parent ); ?>" class="button back-to-post"><?php printf( __( '&#8592; Back to %1$s', 'capture' ), get_the_title( $post->post_parent ) ); ?></a>
+				<?php if ( $post->post_parent !== 0 ) : ?>
+					<a href="<?php echo get_permalink( $post->post_parent ); ?>" class="button back-to-post"><?php printf( __( '&#8592; Back to %1$s', 'capture' ), get_the_title( $post->post_parent ) ); ?></a>
+				<?php endif; ?>
 
 				<section class="attachment">
 					<?php

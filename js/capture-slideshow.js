@@ -2,7 +2,7 @@
  * Capture Slideshow - A jQuery plugin for fullscreen slideshow functionality in the Capture WordPress theme.
  *
  * License: GPL2
- * Copyright Scott Sousa (Slocum Studio), http://slocumthemes.com/
+ * Copyright Scott Sousa (Slocum Studio), https://slocumthemes.com/
  */
 
 ( function( $ ) {
