@@ -3,7 +3,7 @@
  * This class manages all functionality with our Capture theme.
  */
 class Capture {
-	const CAPTURE_VERSION = '1.1.9';
+	const CAPTURE_VERSION = '1.2.0';
 
 	private static $instance; // Keep track of the instance
 
