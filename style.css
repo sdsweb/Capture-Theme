@@ -291,7 +291,7 @@ select {
 /* WordPress Galleries */
 .gallery-icon a {
 	position: relative;
-	display: inline-block;
+	display: block;
 }
 
 .ie8 .gallery-icon a {
