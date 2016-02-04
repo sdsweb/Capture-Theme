@@ -90,3 +90,9 @@
  * License: GPL2
  * Copyright: Slocum Studio, https://slocumthemes.com/
  */
+
+/**
+ * SDS Core - /includes/
+ * License: GPL2
+ * Copyright: Slocum Design Studio, http://slocumstudio.com/
+ */
