@@ -2263,6 +2263,11 @@ a.capture-slideshow-prev.disabled .svg, a.capture-slideshow-next.disabled .svg {
 	text-align: right;
 }
 
+.widget ul {
+	list-style: disc;
+	margin-left: 40px;
+}
+
 /* Footer */
 #footer {
 	padding: 1em;
